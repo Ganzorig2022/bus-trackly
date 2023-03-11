@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408727853313",
+    "project_id": "bus-trackly",
+    "storage_bucket": "bus-trackly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408727853313:android:a40af4038895cf3a6da300",
+        "android_client_info": {
+          "package_name": "com.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408727853313-r1vkq7ob2hi37el1hbebhpasovpgiiph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClM1CIdAR-fClVpzQazYnKaVUMheo0JEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408727853313-r1vkq7ob2hi37el1hbebhpasovpgiiph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
