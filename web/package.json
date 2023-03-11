@@ -1,0 +1,38 @@
+{
+  "name": "tracklymb",
+  "version": "0.1.0",
+  "private": true,
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
+    "@prisma/client": "^4.11.0",
+    "@types/node": "18.14.6",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "axios": "^1.3.4",
+    "firebase": "^9.17.2",
+    "leaflet": "^1.9.3",
+    "next": "13.2.3",
+    "prisma": "^4.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-leaflet": "^4.2.1",
+    "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.1",
+    "@types/react-leaflet": "^3.0.0"
+  }
+}
