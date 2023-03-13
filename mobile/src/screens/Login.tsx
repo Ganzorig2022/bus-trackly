@@ -13,37 +13,39 @@ import {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAuthContext} from '../provider/auth';
 import auth from '@react-native-firebase/auth';
+import {useAuth} from '../hooks/useAuth';
 
 const Login = () => {
   const {setIsLoggedIn} = useAuthContext();
+  const {user} = useAuth();
 
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
   });
 
-  const submitHandler = async () => {
+  const submitHandler = () => {
     const {email, password} = inputs;
 
     if (email === '' && password === '') {
-      Alert.alert('Please provide the fields');
+      console.log('Please provide the fields');
     } else {
       auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          Alert.alert('User signed in!');
+          // Alert.alert('User signed in!');
+          console.log('signed in');
           setIsLoggedIn(true);
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('That email address is already in use!');
+            console.log('That email address is already in use!');
           }
 
           if (error.code === 'auth/invalid-email') {
-            Alert.alert('That email address is invalid!');
+            console.log('That email address is invalid!');
           }
-
-          Alert.alert(error);
+          console.log(error);
         });
     }
   };

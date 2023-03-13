@@ -1,38 +1,61 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
-import {useRecoilValue} from 'recoil';
+import MapView, {
+  Marker,
+  MarkerDragStartEndEvent,
+  PROVIDER_GOOGLE,
+} from 'react-native-maps';
+import {useRecoilState} from 'recoil';
 import {LocationCoordState} from '../atom/location';
+import {useFirebase} from '../firebase/useFirebase';
+import {useAuth} from '../hooks/useAuth';
 
 const Map = () => {
-  const origin = useRecoilValue(LocationCoordState);
+  const [phoneLocation, setPhoneLocation] = useRecoilState(LocationCoordState);
+  const {user} = useAuth();
+  const {updateDocument} = useFirebase('Drivers');
+
+  const onDragEnd = (e: MarkerDragStartEndEvent) => {
+    const {latitude, longitude} = e.nativeEvent.coordinate;
+    setPhoneLocation({
+      latitude,
+      longitude,
+    });
+
+    updateDocument(user?.uid as string, {latitude, longitude});
+  };
+
+  // console.log(phoneLocation);
 
   return (
-    <View className="flex items-center justify-center">
+    <View className="flex-1 items-center justify-center">
       <View style={styles.container}>
         <MapView
           style={styles.map}
           // mapType="satellite"
+          provider={PROVIDER_GOOGLE}
           initialRegion={{
-            latitude: origin.latitude,
-            longitude: origin.longitude,
+            latitude: phoneLocation.latitude,
+            longitude: phoneLocation.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-          showsCompass={true}
-          zoomEnabled
+          showsCompass
+          zoomEnabled={true}
           loadingEnabled
-          showsScale>
-          {origin?.latitude && (
+          showsScale
+          showsUserLocation>
+          {phoneLocation?.latitude && (
             <Marker
               coordinate={{
-                latitude: origin.latitude,
-                longitude: origin.longitude,
+                latitude: phoneLocation.latitude,
+                longitude: phoneLocation.longitude,
               }}
               title="Origin"
               description={'This is you'}
               identifier="origin"
-              //   draggable
+              draggable
+              onDragEnd={onDragEnd}
             />
           )}
         </MapView>
@@ -45,13 +68,13 @@ export default Map;
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
     height: 600,
     width: 400,
-    // justifyContent: 'flex-end',
-    // alignItems: 'center',
+    marginTop: 200,
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
+    height: '100%',
   },
 });

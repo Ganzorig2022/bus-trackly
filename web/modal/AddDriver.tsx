@@ -1,4 +1,5 @@
 import { useCollection } from '@/hooks/useCollection';
+import { checkEmptyInputs } from '@/utils/checkEmptyInputs';
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { ChangeEvent, useState } from 'react';
@@ -21,15 +22,22 @@ const AddDriver = ({ isOpen, setIsOpen }: { isOpen: any; setIsOpen: any }) => {
   };
 
   const onSaveHandler = async () => {
+    const isEmpty = checkEmptyInputs(Object.values(values));
+
+    if (isEmpty) {
+      alert('Empty fields');
+      return;
+    }
+
     await createDriverData({
       ...values,
       role: 'USER',
       active: false,
+      location: { latitude: 0, longitude: 0 },
     });
     alert('Амжилттай хадгаллаа'), setIsOpen(false);
   };
 
-  // console.log(values);
   return (
     <Modal open={isOpen} onClose={() => setIsOpen(false)}>
       <Box
