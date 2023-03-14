@@ -39,7 +39,7 @@ const Drivers = () => {
     })();
   }, [snapshotData, driverData]);
 
-  console.log(inActiveDrivers);
+  // console.log(activeDrivers);
 
   return (
     <Box sx={{ display: 'flex', width: '100vw', height: '100vh' }}>

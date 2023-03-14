@@ -4,8 +4,21 @@ import styles from '../styles/Home.module.css';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import profilePic from '../assets/ProfilePicture.png';
+import { useRecoilState } from 'recoil';
+import { LocationCoordState } from '@/atom/location';
 
-const DriversPro = ({ firstName, lastName, email, phone }: DriverType) => {
+const DriversPro = ({
+  firstName,
+  lastName,
+  email,
+  phone,
+  location,
+}: DriverType) => {
+  const [coord, setCoord] = useRecoilState(LocationCoordState);
+  const clickHandler = () => {
+    setCoord(location);
+  };
+
   return (
     <Box
       width='80%'
@@ -14,6 +27,7 @@ const DriversPro = ({ firstName, lastName, email, phone }: DriverType) => {
       sx={{ backgroundColor: '#fff' }}
       alignItems='center'
       display='flex'
+      onClick={clickHandler}
     >
       <Box
         flex={1}
